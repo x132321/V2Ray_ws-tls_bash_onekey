@@ -5,7 +5,7 @@
 #	Author:	wulabing
 #	Dscription: V2ray ws+tls onekey 
 #	Version: 3.3.1
-#	Blog: https://www.wulabing.com
+#	Blog: https://www.365cent.com
 #	Official document: www.v2ray.com
 #====================================================
 
@@ -224,7 +224,7 @@ ssl_install(){
 
 }
 domain_check(){
-    stty erase '^H' && read -p "请输入你的域名信息(eg:www.wulabing.com):" domain
+    stty erase '^H' && read -p "请输入你的域名信息(eg:www.365cent.com):" domain
     domain_ip=`ping ${domain} -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
     echo -e "${OK} ${GreenBG} 正在获取 公网ip 信息，请耐心等待 ${Font}"
     local_ip=`curl -4 ip.sb`
@@ -291,23 +291,23 @@ v2ray_conf_add(){
     rm -rf ${v2ray_conf}
     rm -rf ${client_conf}
     cd /etc/v2ray
-    wget --no-check-certificate https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/http2/config.json
+    wget --no-check-certificate https://raw.githubusercontent.com/365cent/V2Ray_ws-tls_bash_onekey/master/http2/config.json
     judge "config.json 下载"
-    wget --no-check-certificate https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/http2/client.json
+    wget --no-check-certificate https://raw.githubusercontent.com/365cent/V2Ray_ws-tls_bash_onekey/master/http2/client.json
     judge "client.json 下载"
     random_UUID
     modify_port_UUID ${v2ray_conf}
     judge "config.json 配置变更"
     modify_port_UUID ${client_conf}
     judge "client.json 配置变更"
-    json_addr=`curl --upload-file ${client_conf} https://transfer.sh/wulabing_${camouflage}_${UUID}.json`
+    json_addr=`curl --upload-file ${client_conf} https://transfer.sh/365cent_${camouflage}_${UUID}.json`
 }
 
 vmess_qr_config(){
     cat >/etc/v2ray/vmess_qr.json <<-EOF
 {
   "v": "2",
-  "ps": "wulabing_${domain}",
+  "ps": "365cent_${domain}",
   "add": "${domain}",
   "port": "${port}",
   "id": "${UUID}",
